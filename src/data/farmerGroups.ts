@@ -20,7 +20,7 @@ export interface District {
   totalMembers: number;
 }
 
-// Dataset sebagaimana disediakan – dengan koordinat perkiraan untuk area Pandeglang
+// Dataset as provided - with approximate coordinates for Pandeglang area
 export const farmerGroups: FarmerGroup[] = [
   {
     id: "1",
@@ -201,7 +201,7 @@ export const farmerGroups: FarmerGroup[] = [
     districtSlug: "cisata",
     village: "Sukamanah",
     phone: "08245678901",
-    latitude: -6.3890,
+    latitude: -6.389,
     longitude: 106.0234,
   },
   {
@@ -303,7 +303,9 @@ export const getDistricts = (): District[] => {
     }
   });
 
-  return Array.from(districtMap.values()).sort((a, b) => a.name.localeCompare(b.name));
+  return Array.from(districtMap.values()).sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
 };
 
 export const getGroupsByDistrict = (slug: string): FarmerGroup[] => {

@@ -21,7 +21,7 @@ export const Footer = () => {
             />
             <div>
               <p className="font-semibold text-foreground">
-                Pemetaan Petani Kabupaten Pandeglang
+                Pemetaan Petani Padi Wilayah Kabupaten Pandeglang
               </p>
               <p className="text-sm text-muted-foreground">
                 Skripsi Alief Faisal Adriansyah

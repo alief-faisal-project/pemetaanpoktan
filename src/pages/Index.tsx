@@ -1,14 +1,104 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MapPin, Users, Building2 } from "lucide-react";
+import { MapPin, Users, Building2, Mail, Send } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { StatCard } from "@/components/cards/StatCard";
 import { DistrictCard } from "@/components/cards/DistrictCard";
 import { getDistricts, getTotalStats } from "@/data/farmerGroups";
 import { staggerContainer } from "@/components/layout/PageTransition";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import heroBackground from "@/assets/hero-background.jpg";
+
+const ContactSection = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = encodeURIComponent(`Pesan dari ${name}`);
+    const body = encodeURIComponent(
+      `Nama: ${name}\nEmail: ${email}\n\nPesan:\n${message}`
+    );
+    window.location.href = `mailto:alieffaisal222@gmail.com?subject=${subject}&body=${body}`;
+  };
+
+  return (
+    <section className="py-16 bg-primary/5">
+      <div className="container">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="max-w-xl mx-auto"
+        >
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
+              <Mail className="h-7 w-7 text-primary" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+              Kirim Masukan
+            </h2>
+            <p className="text-muted-foreground">
+              Punya saran dan masukan? kirim dibawah ya ╰⋃╯
+            </p>
+          </div>
+
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true }}
+            onSubmit={handleSubmit}
+            className="space-y-4 bg-background rounded-xl p-6 shadow-lg border"
+          >
+            <div className="space-y-2">
+              <Label htmlFor="name">Nama</Label>
+              <Input
+                id="name"
+                placeholder="Masukkan nama ente disini"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Masukkan email disini"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="message">Pesan</Label>
+              <Textarea
+                id="message"
+                placeholder="Ketik pesan di sini ✎𓂃..."
+                rows={4}
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                required
+              />
+            </div>
+            <Button type="submit" size="lg" className="w-full gap-2">
+              <Send className="h-5 w-5" />
+              Kirim Pesan
+            </Button>
+          </motion.form>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const Index = () => {
   const districts = getDistricts();
@@ -58,13 +148,13 @@ const Index = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
-              Pemetaan Kelompok Petani Padi di{" "}
-              <span className="text-primary">Kabupaten Pandeglang</span>
+              Pemetaan Petani Padi{" "}
+              <span className="text-primary">Wilayah Kabupaten Pandeglang</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
-              Website memetakan dan mengelola data kelompok tani
-              (poktan) di seluruh wilayah Kabupaten Pandeglang, Banten.
+              Website pemetaan dan pengelolaan data kelompok tani padi di
+              seluruh wilayah Kabupaten Pandeglang, Banten.
             </p>
 
             <motion.div
@@ -79,16 +169,30 @@ const Index = () => {
                   className="gap-2 bg-primary hover:bg-primary/90 shadow-lg"
                 >
                   <MapPin className="h-5 w-5" />
-                  Peta Persebaran Poktan
+                  Peta Persebaran Tani
                 </Button>
               </Link>
               <Button
                 variant="outline"
                 size="lg"
                 asChild
-                className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"
+                className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("districts")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
               >
-                <a href="#districts">Jelajahi Kecamatan</a>
+                <motion.a
+                  href="#districts"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  Kecamatan Terdata
+                </motion.a>
               </Button>
             </motion.div>
           </motion.div>
@@ -104,18 +208,21 @@ const Index = () => {
               value={stats.totalGroups}
               label="Total Kelompok Tani"
               delay={0}
+              href="/all-groups"
             />
             <StatCard
               icon={Building2}
               value={stats.totalDistricts}
               label="Kecamatan"
               delay={0.1}
+              href="/all-districts"
             />
             <StatCard
               icon={Users}
               value={stats.totalMembers}
               label="Total Anggota"
               delay={0.2}
+              href="/all-members"
             />
           </div>
         </div>
@@ -154,32 +261,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-primary/5">
-        <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Lihat Peta Lengkap
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              Jelajahi peta semua lokasi kelompok tani dan batas wilayah
-              kecamatan.
-            </p>
-            <Link to="/map">
-              <Button size="lg" className="gap-2">
-                <MapPin className="h-5 w-5" />
-                Peta Persebaran Poktan
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      {/* Contact Section */}
+      <ContactSection />
     </Layout>
   );
 };

@@ -1,14 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  MapPin,
-  Users,
-  User,
-  Phone,
-  Leaf,
-  Map,
-} from "lucide-react";
+import { ChevronLeft, MapPin, Users, User, Phone, Map } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -26,7 +18,9 @@ const GroupDetailPage = () => {
     return (
       <Layout>
         <div className="container py-16 text-center">
-          <h1 className="text-2xl font-bold mb-4">Kelompok Tani tidak ditemukan</h1>
+          <h1 className="text-2xl font-bold mb-4">
+            Kelompok Tani tidak ditemukan
+          </h1>
           <Link to="/">
             <Button variant="outline">
               <ChevronLeft className="mr-2 h-4 w-4" />
@@ -39,7 +33,9 @@ const GroupDetailPage = () => {
   }
 
   const whatsappLink = group.phone
-    ? `https://wa.me/62${group.phone.replace(/^0/, "").replace(/\D/g, "")}?text=Halo, saya ingin menghubungi ${group.name}`
+    ? `https://wa.me/62${group.phone
+        .replace(/^0/, "")
+        .replace(/\D/g, "")}?text=Halo, saya ingin menghubungi ${group.name}`
     : null;
 
   return (
@@ -66,13 +62,13 @@ const GroupDetailPage = () => {
               {/* Info Section */}
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <Badge variant="secondary" className="bg-accent text-accent-foreground">
-                    <Leaf className="mr-1 h-3 w-3" />
+                  <Badge
+                    variant="secondary"
+                    className="bg-accent text-accent-foreground"
+                  >
                     {group.commodity}
                   </Badge>
-                  <Badge variant="outline">
-                    Kec. {group.district}
-                  </Badge>
+                  <Badge variant="outline">Kec. {group.district}</Badge>
                 </div>
 
                 <h1 className="text-2xl md:text-4xl font-bold text-foreground mb-4">
@@ -91,7 +87,9 @@ const GroupDetailPage = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Ketua</p>
-                      <p className="font-semibold text-foreground">{group.chairperson}</p>
+                      <p className="font-semibold text-foreground">
+                        {group.chairperson}
+                      </p>
                     </div>
                   </motion.div>
 
@@ -106,7 +104,9 @@ const GroupDetailPage = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">Anggota</p>
-                      <p className="font-semibold text-foreground">{group.memberCount} Orang</p>
+                      <p className="font-semibold text-foreground">
+                        {group.memberCount} Orang
+                      </p>
                     </div>
                   </motion.div>
 
@@ -139,7 +139,9 @@ const GroupDetailPage = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Telepon</p>
-                        <p className="font-semibold text-foreground">{group.phone}</p>
+                        <p className="font-semibold text-foreground">
+                          {group.phone}
+                        </p>
                       </div>
                     </motion.div>
                   )}
@@ -156,9 +158,12 @@ const GroupDetailPage = () => {
                         <MapPin className="h-5 w-5 text-primary" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Koordinat</p>
+                        <p className="text-sm text-muted-foreground">
+                          Koordinat
+                        </p>
                         <p className="font-semibold text-foreground font-mono text-sm">
-                          {group.latitude.toFixed(4)}, {group.longitude.toFixed(4)}
+                          {group.latitude.toFixed(4)},{" "}
+                          {group.longitude.toFixed(4)}
                         </p>
                       </div>
                     </motion.div>
@@ -180,8 +185,16 @@ const GroupDetailPage = () => {
                   </Link>
                   {whatsappLink && (
                     <Button variant="outline" className="gap-2" asChild>
-                      <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
-                        <img src={logoWhatsapp} alt="WhatsApp" className="h-5 w-5" />
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src={logoWhatsapp}
+                          alt="WhatsApp"
+                          className="h-5 w-5"
+                        />
                         Hubungi via WhatsApp
                       </a>
                     </Button>
@@ -194,7 +207,6 @@ const GroupDetailPage = () => {
                   </Link>
                 </motion.div>
               </div>
-
             </div>
           </motion.div>
         </div>
