@@ -40,7 +40,7 @@ export const Header = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="font-bold text-foreground text-sm leading-tight">
-              Pemetaan Petani Padi
+              Pemetaan Kelompok Petani Padi
             </span>
             <span className="text-xs text-muted-foreground leading-tight">
               Wilayah Kab. Pandeglang
