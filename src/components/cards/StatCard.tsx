@@ -8,6 +8,7 @@ interface StatCardProps {
   label: string;
   delay?: number;
   href?: string;
+  hoverVariant?: "default" | "green";
 }
 
 export const StatCard = ({
@@ -16,7 +17,10 @@ export const StatCard = ({
   label,
   delay = 0,
   href,
+  hoverVariant = "default",
 }: StatCardProps) => {
+  const isGreenHover = hoverVariant === "green";
+
   const content = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -28,17 +32,27 @@ export const StatCard = ({
         transition: { duration: 0.3, ease: "easeOut" },
       }}
       whileTap={{ scale: 0.98 }}
-      className="flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border shadow-card cursor-pointer group relative overflow-hidden"
+      className={`flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border shadow-card cursor-pointer group relative overflow-hidden ${
+        isGreenHover ? "hover:bg-primary hover:border-primary" : ""
+      }`}
     >
       {/* Hover gradient overlay */}
-      <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      {!isGreenHover && (
+        <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      )}
 
       <motion.div
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300"
+        className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 transition-colors duration-300 ${
+          isGreenHover ? "group-hover:bg-white/20" : "group-hover:bg-primary/20"
+        }`}
         whileHover={{ rotate: [0, -10, 10, 0] }}
         transition={{ duration: 0.5 }}
       >
-        <Icon className="h-7 w-7 text-primary" />
+        <Icon
+          className={`h-7 w-7 text-primary transition-colors duration-300 ${
+            isGreenHover ? "group-hover:text-white" : ""
+          }`}
+        />
       </motion.div>
 
       <motion.span
@@ -50,12 +64,20 @@ export const StatCard = ({
           type: "spring",
           stiffness: 200,
         }}
-        className="relative stat-number text-3xl"
+        className={`relative stat-number text-3xl transition-colors duration-300 ${
+          isGreenHover ? "group-hover:text-white" : ""
+        }`}
       >
         {value.toLocaleString("id-ID")}
       </motion.span>
 
-      <span className="relative text-sm text-muted-foreground font-medium group-hover:text-foreground transition-colors duration-300">
+      <span
+        className={`relative text-sm text-muted-foreground font-medium transition-colors duration-300 ${
+          isGreenHover
+            ? "group-hover:text-white"
+            : "group-hover:text-foreground"
+        }`}
+      >
         {label}
       </span>
 
@@ -63,7 +85,9 @@ export const StatCard = ({
       <motion.div
         initial={{ opacity: 0, x: -10 }}
         whileHover={{ opacity: 1, x: 0 }}
-        className="absolute bottom-3 right-3 text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+          isGreenHover ? "text-white" : "text-primary"
+        }`}
       >
         <svg
           className="w-5 h-5"

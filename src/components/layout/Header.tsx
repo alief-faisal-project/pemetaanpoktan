@@ -18,7 +18,7 @@ export const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background"
     >
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo - Aligned to left */}
@@ -29,23 +29,23 @@ export const Header = () => {
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             className="flex h-10 w-10 items-center justify-center"
           >
-            <img 
-              src={logoPandeglang} 
-              alt="Logo Kabupaten Pandeglang" 
+            <img
+              src={logoPandeglang}
+              alt="Logo Kabupaten Pandeglang"
               className="h-10 w-auto object-contain mix-blend-multiply"
             />
           </motion.div>
-          <motion.div 
+          <motion.div
             className="flex flex-col"
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <span className="font-bold text-foreground text-sm leading-tight">
-              Pemetaan Poktan Padi
+              Pemetaan Kelompok Petani Padi
             </span>
             <span className="text-xs text-muted-foreground leading-tight">
-              di Kab. Pandeglang
+              Kab. Pandeglang
             </span>
           </motion.div>
         </Link>
@@ -87,7 +87,11 @@ export const Header = () => {
                       <motion.div
                         layoutId="activeNav"
                         className="absolute inset-0 bg-primary/10 rounded-md -z-10"
-                        transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 35,
+                        }}
                       />
                     )}
                   </Button>

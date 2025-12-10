@@ -11,6 +11,7 @@ import AllGroupsPage from "./pages/AllGroupsPage";
 import AllDistrictsPage from "./pages/AllDistrictsPage";
 import AllMembersPage from "./pages/AllMembersPage";
 import NotFound from "./pages/NotFound";
+import { CacheRestoreDialog } from "./components/CacheRestoreDialog";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <CacheRestoreDialog />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/district/:slug" element={<DistrictPage />} />

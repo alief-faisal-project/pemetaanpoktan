@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MapPin, Users, Building2, Mail, Send } from "lucide-react";
+import { MapPin, Users, Building2, Send } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { StatCard } from "@/components/cards/StatCard";
 import { DistrictCard } from "@/components/cards/DistrictCard";
@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import heroBackground from "@/assets/hero-background.jpg";
+import sendFeedbackIcon from "@/assets/send-feedback-icon.png";
 
 const ContactSection = () => {
   const [name, setName] = useState("");
@@ -38,14 +39,18 @@ const ContactSection = () => {
           className="max-w-xl mx-auto"
         >
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary/10 mb-4">
-              <Mail className="h-7 w-7 text-primary" />
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4">
+              <img
+                src={sendFeedbackIcon}
+                alt="Kirim Masukan"
+                className="h-14 w-14 object-contain"
+              />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               Kirim Masukan
             </h2>
             <p className="text-muted-foreground">
-              Punya saran dan masukan? kirim dibawah ya ╰⋃╯
+              Punya saran atau pertanyaan? Kirim pesan kepada kami.
             </p>
           </div>
 
@@ -61,7 +66,7 @@ const ContactSection = () => {
               <Label htmlFor="name">Nama</Label>
               <Input
                 id="name"
-                placeholder="Masukkan nama ente disini"
+                placeholder="Masukkan nama Anda"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -72,7 +77,7 @@ const ContactSection = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="Masukkan email disini"
+                placeholder="Masukkan email Anda"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -82,7 +87,7 @@ const ContactSection = () => {
               <Label htmlFor="message">Pesan</Label>
               <Textarea
                 id="message"
-                placeholder="Ketik pesan di sini ✎𓂃..."
+                placeholder="Tulis pesan Anda di sini..."
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -148,12 +153,12 @@ const Index = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
-              Pemetaan Kelompok Petani Padi di{" "}
+              Pemetaan Petani Padi{" "}
               <span className="text-primary">Kabupaten Pandeglang</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
-              Website pemetaan dan pengelolaan data kelompok petani padi di
+              Website pemetaan dan pengelolaan kelompok petani padi di
               seluruh wilayah Kabupaten Pandeglang, Banten.
             </p>
 
@@ -169,7 +174,7 @@ const Index = () => {
                   className="gap-2 bg-primary hover:bg-primary/90 shadow-lg"
                 >
                   <MapPin className="h-5 w-5" />
-                  Peta Persebaran Kelompok Tani
+                  Buka Peta Interaktif
                 </Button>
               </Link>
               <Button
@@ -191,7 +196,7 @@ const Index = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  Lihat kecamatan Terdaftar
+                  Jelajahi Kecamatan
                 </motion.a>
               </Button>
             </motion.div>
@@ -223,6 +228,7 @@ const Index = () => {
               label="Total Anggota"
               delay={0.2}
               href="/all-members"
+              hoverVariant="green"
             />
           </div>
         </div>
