@@ -148,12 +148,12 @@ const Index = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
-              Pemetaan Petani Padi{" "}
-              <span className="text-primary">Wilayah Kabupaten Pandeglang</span>
+              Pemetaan Kelompok Petani Padi di{" "}
+              <span className="text-primary">Kabupaten Pandeglang</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
-              Website pemetaan dan pengelolaan data kelompok tani padi di
+              Website pemetaan dan pengelolaan data kelompok petani padi di
               seluruh wilayah Kabupaten Pandeglang, Banten.
             </p>
 
@@ -191,7 +191,7 @@ const Index = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  Daftar kecamatan terdata
+                  Lihat kecamatan Terdaftar
                 </motion.a>
               </Button>
             </motion.div>

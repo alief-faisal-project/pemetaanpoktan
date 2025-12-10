@@ -62,10 +62,7 @@ const GroupDetailPage = () => {
               {/* Info Section */}
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-4">
-                  <Badge
-                    variant="secondary"
-                    className="bg-accent text-accent-foreground"
-                  >
+                  <Badge className="bg-primary text-primary-foreground hover:bg-primary/90">
                     {group.commodity}
                   </Badge>
                   <Badge variant="outline">Kec. {group.district}</Badge>

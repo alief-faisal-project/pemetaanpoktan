@@ -17,16 +17,12 @@ export const GroupCard = ({ group }: GroupCardProps) => {
       whileHover={{ y: -4 }}
       className="group relative overflow-hidden rounded-xl bg-card border border-border shadow-card transition-shadow hover:shadow-card-hover"
     >
-      {/* Bilah aksen atas */}
-
+      {/* Top accent bar */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
 
       <div className="p-6">
         <div className="flex items-start justify-between mb-3">
-          <Badge
-            variant="secondary"
-            className="bg-accent text-accent-foreground"
-          >
+          <Badge className="bg-primary text-primary-foreground hover:bg-primary/90">
             {group.commodity}
           </Badge>
           <div className="flex items-center gap-1 text-sm text-muted-foreground">

@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronLeft, MapPin, Users, Search } from "lucide-react";
+import { ChevronLeft, Users, Search } from "lucide-react";
 import { useState, useMemo } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { GroupCard } from "@/components/cards/GroupCard";
@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { SearchInput } from "@/components/ui/search-input";
 import { getGroupsByDistrict, getDistrictBySlug } from "@/data/farmerGroups";
 import { staggerContainer } from "@/components/layout/PageTransition";
-
+import districtMapIcon from "@/assets/district-map-icon.png";
 const DistrictPage = () => {
   const { slug } = useParams<{ slug: string }>();
   const [searchQuery, setSearchQuery] = useState("");
@@ -63,9 +63,13 @@ const DistrictPage = () => {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                    <MapPin className="h-6 w-6" />
-                  </div>
+                  <motion.img
+                    src={districtMapIcon}
+                    alt="Maps"
+                    className="h-12 w-12 object-contain"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.2 }}
+                  />
                   <h1 className="text-2xl md:text-3xl font-bold text-foreground">
                     Kecamatan {district.name}
                   </h1>
@@ -79,14 +83,18 @@ const DistrictPage = () => {
                 <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border">
                   <Users className="h-5 w-5 text-primary" />
                   <div className="text-sm">
-                    <span className="font-bold text-foreground">{district.groupCount}</span>
+                    <span className="font-bold text-foreground">
+                      {district.groupCount}
+                    </span>
                     <span className="text-muted-foreground ml-1">Poktan</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 px-4 py-2 rounded-lg bg-card border border-border">
                   <Users className="h-5 w-5 text-primary" />
                   <div className="text-sm">
-                    <span className="font-bold text-foreground">{district.totalMembers}</span>
+                    <span className="font-bold text-foreground">
+                      {district.totalMembers}
+                    </span>
                     <span className="text-muted-foreground ml-1">Anggota</span>
                   </div>
                 </div>
