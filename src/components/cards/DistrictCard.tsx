@@ -43,7 +43,7 @@ export const DistrictCard = ({ district }: DistrictCardProps) => {
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary">
             <Users className="h-4 w-4" />
             <span className="font-semibold text-sm">
-              {district.totalMembers} Anggota Terdata
+              {district.totalMembers} Anggota Terdaftar
             </span>
           </div>
         </div>
