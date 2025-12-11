@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
-import heroBackground from "@/assets/hero-background.jpg";
+import heroBackground from "@/assets/hero-background.jpeg";
 import sendFeedbackIcon from "@/assets/send-feedback-icon.png";
 
 const ContactSection = () => {
