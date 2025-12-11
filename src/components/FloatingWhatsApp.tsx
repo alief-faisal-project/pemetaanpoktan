@@ -21,13 +21,13 @@ export const FloatingWhatsApp = ({
 
   useEffect(() => {
     const handleScroll = () => {
-      const districtsSection = document.getElementById("districts");
+      const contactSection = document.getElementById("contact-section");
 
-      if (districtsSection) {
-        const rect = districtsSection.getBoundingClientRect();
+      if (contactSection) {
+        const rect = contactSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // Show when districts section is in viewport
+        // Show when contact section is in viewport
         const isInView = rect.top < windowHeight && rect.bottom > 0;
         setIsVisible(isInView);
       } else {
@@ -64,7 +64,7 @@ export const FloatingWhatsApp = ({
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 20 }}
                 onClick={handleClick}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg hover:shadow-xl transition-shadow"
+                className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg hover:shadow-xl transition-shadow animate-pulse"
                 aria-label="Chat via WhatsApp"
               >
                 <img
@@ -75,7 +75,7 @@ export const FloatingWhatsApp = ({
               </motion.button>
             </TooltipTrigger>
             <TooltipContent side="left">
-              <p>Kirim Masukan via WhatsApp</p>
+              <p>Chat via WhatsApp</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

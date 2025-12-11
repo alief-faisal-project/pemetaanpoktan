@@ -29,7 +29,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section className="py-16 bg-primary/5">
+    <section id="contact-section" className="py-16 bg-primary/5">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -153,13 +153,13 @@ const Index = () => {
             className="text-center max-w-3xl mx-auto"
           >
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
-              Pemetaan Petani Padi{" "}
+              Pemetaan Petani{" "}
               <span className="text-primary">Kabupaten Pandeglang</span>
             </h1>
 
             <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
-              Website pemetaan dan pengelolaan kelompok petani padi di
-              seluruh wilayah Kabupaten Pandeglang, Banten.
+              Website pemetaan dan pengelolaan kelompok petani padi di seluruh
+              wilayah Kabupaten Pandeglang, Banten.
             </p>
 
             <motion.div
@@ -214,6 +214,7 @@ const Index = () => {
               label="Total Kelompok Tani"
               delay={0}
               href="/all-groups"
+              hoverVariant="green"
             />
             <StatCard
               icon={Building2}
@@ -221,6 +222,7 @@ const Index = () => {
               label="Kecamatan"
               delay={0.1}
               href="/all-districts"
+              hoverVariant="green"
             />
             <StatCard
               icon={Users}

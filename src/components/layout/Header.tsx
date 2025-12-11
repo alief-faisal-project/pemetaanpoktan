@@ -67,7 +67,7 @@ export const Header = () => {
                     size="sm"
                     className="relative overflow-hidden"
                   >
-                    {/* Desktop: show text */}
+                    {/* Desktop: tampilkan text */}
                     <motion.span
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -75,7 +75,7 @@ export const Header = () => {
                     >
                       {link.label}
                     </motion.span>
-                    {/* Mobile: show icon */}
+                    {/* Mobile: tampilkan icon */}
                     <motion.img
                       src={link.icon}
                       alt={link.label}
