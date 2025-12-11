@@ -174,7 +174,7 @@ const Index = () => {
                   className="gap-2 bg-primary hover:bg-primary/90 shadow-lg"
                 >
                   <MapPin className="h-5 w-5" />
-                  Buka Peta Interaktif
+                  Peta Persebaran Kelompok Tani
                 </Button>
               </Link>
               <Button
