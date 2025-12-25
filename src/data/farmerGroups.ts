@@ -175,8 +175,8 @@ export const farmerGroups: FarmerGroup[] = [
     districtSlug: "carita",
     village: "Sukajadi",
     phone: "08223456789",
-    latitude: -6.2234,
-    longitude: 105.8234,
+    latitude: -6.3273,
+    longitude: 105.8371,
   },
   {
     id: "13",

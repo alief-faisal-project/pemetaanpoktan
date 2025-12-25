@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
 
 @layer base {
   :root {
@@ -39,14 +39,29 @@
     --radius: 0.75rem;
 
     /* Custom design tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(142 76% 36%) 0%, hsl(160 60% 45%) 100%);
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(150 20% 98%) 100%);
-    --gradient-overlay: linear-gradient(180deg, transparent 0%, hsl(0 0% 0% / 0.05) 100%);
-    
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(142 76% 36%) 0%,
+      hsl(160 60% 45%) 100%
+    );
+    --gradient-card: linear-gradient(
+      180deg,
+      hsl(0 0% 100%) 0%,
+      hsl(150 20% 98%) 100%
+    );
+    --gradient-overlay: linear-gradient(
+      180deg,
+      transparent 0%,
+      hsl(0 0% 0% / 0.05) 100%
+    );
+
     --shadow-sm: 0 1px 2px 0 hsl(150 10% 15% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(150 10% 15% / 0.08), 0 2px 4px -2px hsl(150 10% 15% / 0.05);
-    --shadow-lg: 0 10px 15px -3px hsl(150 10% 15% / 0.1), 0 4px 6px -4px hsl(150 10% 15% / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(150 10% 15% / 0.1), 0 8px 10px -6px hsl(150 10% 15% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(150 10% 15% / 0.08),
+      0 2px 4px -2px hsl(150 10% 15% / 0.05);
+    --shadow-lg: 0 10px 15px -3px hsl(150 10% 15% / 0.1),
+      0 4px 6px -4px hsl(150 10% 15% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(150 10% 15% / 0.1),
+      0 8px 10px -6px hsl(150 10% 15% / 0.05);
     --shadow-glow: 0 0 40px hsl(142 76% 36% / 0.2);
     --shadow-card-hover: 0 20px 40px -10px hsl(142 76% 36% / 0.15);
 
@@ -109,10 +124,15 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-bold tracking-tight;
   }
 }
@@ -138,7 +158,7 @@
 
   .leaflet-container {
     @apply rounded-lg;
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif !important;
   }
 
   .leaflet-popup-content-wrapper {
@@ -154,15 +174,43 @@
   }
 
   @keyframes markerBounce {
-    0%, 100% { transform: translateY(0); }
-    25% { transform: translateY(-15px); }
-    50% { transform: translateY(-5px); }
-    75% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(-15px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+    75% {
+      transform: translateY(-10px);
+    }
   }
 
   .stat-number {
     @apply font-extrabold text-4xl md:text-5xl text-primary;
     letter-spacing: -0.02em;
+  }
+}
+
+@layer utilities {
+  .animate-bob {
+    animation: bob 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes bob {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+    100% {
+      transform: translateY(0);
+    }
   }
 }
 
@@ -200,7 +248,9 @@
 
 /* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

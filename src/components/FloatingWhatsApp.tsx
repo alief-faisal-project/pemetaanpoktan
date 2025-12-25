@@ -26,17 +26,14 @@ export const FloatingWhatsApp = ({
       if (contactSection) {
         const rect = contactSection.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-
-        // Show when contact section is in viewport
-        const isInView = rect.top < windowHeight && rect.bottom > 0;
-        setIsVisible(isInView);
+        setIsVisible(rect.top < windowHeight && rect.bottom > 0);
       } else {
         setIsVisible(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Check initial state
+    handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -57,14 +54,21 @@ export const FloatingWhatsApp = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <motion.button
-                initial={{ opacity: 0, scale: 0.5, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.5, y: 20 }}
-                whileHover={{ scale: 1.1 }}
+                initial={{ opacity: 0, y: 24, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 24, scale: 0.9 }}
+                whileHover={{
+                  y: -4,
+                  scale: 1.05,
+                  boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
+                }}
                 whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                transition={{
+                  duration: 0.35,
+                  ease: "easeOut",
+                }}
                 onClick={handleClick}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg hover:shadow-xl transition-shadow animate-pulse"
+                className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-md"
                 aria-label="Chat via WhatsApp"
               >
                 <img
@@ -74,8 +78,9 @@ export const FloatingWhatsApp = ({
                 />
               </motion.button>
             </TooltipTrigger>
+
             <TooltipContent side="left">
-              <p>Chat via WhatsApp</p>
+              <p>Kirim Masukan</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

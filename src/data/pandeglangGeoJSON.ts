@@ -34,7 +34,7 @@ const districtCenters: Record<string, [number, number]> = {
   angsana: [-6.5156, 105.8595],
   picung: [-6.4266, 105.9484],
   pagelaran: [-6.3567, 106.0123],
-  carita: [-6.2234, 105.8234],
+  carita: [-6.3273, 105.8371],
   menes: [-6.4567, 105.9789],
   cisata: [-6.389, 106.0234],
   saketi: [-6.4045, 106.0595],

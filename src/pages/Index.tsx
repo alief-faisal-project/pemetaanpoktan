@@ -214,7 +214,6 @@ const Index = () => {
               label="Total Kelompok Tani"
               delay={0}
               href="/all-groups"
-              hoverVariant="green"
             />
             <StatCard
               icon={Building2}
@@ -222,7 +221,6 @@ const Index = () => {
               label="Kecamatan"
               delay={0.1}
               href="/all-districts"
-              hoverVariant="green"
             />
             <StatCard
               icon={Users}
@@ -230,7 +228,6 @@ const Index = () => {
               label="Total Anggota"
               delay={0.2}
               href="/all-members"
-              hoverVariant="green"
             />
           </div>
         </div>

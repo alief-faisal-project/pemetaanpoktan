@@ -8,7 +8,6 @@ interface StatCardProps {
   label: string;
   delay?: number;
   href?: string;
-  hoverVariant?: "default" | "green";
 }
 
 export const StatCard = ({
@@ -17,77 +16,61 @@ export const StatCard = ({
   label,
   delay = 0,
   href,
-  hoverVariant = "default",
 }: StatCardProps) => {
-  const isGreenHover = hoverVariant === "green";
-
   const content = (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{
+        duration: 0.6,
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
+      }}
       whileHover={{
-        y: -8,
+        y: -6,
         scale: 1.02,
-        transition: { duration: 0.3, ease: "easeOut" },
       }}
       whileTap={{ scale: 0.98 }}
-      className={`flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border shadow-card cursor-pointer group relative overflow-hidden ${
-        isGreenHover ? "hover:bg-primary hover:border-primary" : ""
-      }`}
+      className="group relative flex flex-col items-center gap-3 p-6 rounded-xl bg-card border border-border shadow-card cursor-pointer overflow-hidden transition-shadow duration-300 hover:shadow-lg"
     >
-      {/* Hover gradient overlay */}
-      {!isGreenHover && (
-        <motion.div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      )}
+      {/* Soft hover overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
+      {/* Icon */}
       <motion.div
-        className={`relative flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 transition-colors duration-300 ${
-          isGreenHover ? "group-hover:bg-white/20" : "group-hover:bg-primary/20"
-        }`}
-        whileHover={{ rotate: [0, -10, 10, 0] }}
-        transition={{ duration: 0.5 }}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 transition-colors duration-300 group-hover:bg-primary/20"
+        whileHover={{ rotate: [0, -8, 8, 0] }}
+        transition={{ duration: 0.4 }}
       >
-        <Icon
-          className={`h-7 w-7 text-primary transition-colors duration-300 ${
-            isGreenHover ? "group-hover:text-white" : ""
-          }`}
-        />
+        <Icon className="h-7 w-7 text-primary" />
       </motion.div>
 
+      {/* Value */}
       <motion.span
-        initial={{ opacity: 0, scale: 0.5 }}
+        initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{
-          duration: 0.6,
-          delay: delay + 0.2,
+          duration: 0.5,
+          delay: delay + 0.15,
           type: "spring",
-          stiffness: 200,
+          stiffness: 180,
         }}
-        className={`relative stat-number text-3xl transition-colors duration-300 ${
-          isGreenHover ? "group-hover:text-white" : ""
-        }`}
+        className="relative text-3xl font-bold text-primary"
       >
         {value.toLocaleString("id-ID")}
       </motion.span>
 
-      <span
-        className={`relative text-sm text-muted-foreground font-medium transition-colors duration-300 ${
-          isGreenHover
-            ? "group-hover:text-white"
-            : "group-hover:text-foreground"
-        }`}
-      >
+      {/* Label */}
+      <span className="relative text-sm font-medium text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
         {label}
       </span>
 
-      {/* Arrow indicator on hover */}
+      {/* Arrow */}
       <motion.div
-        initial={{ opacity: 0, x: -10 }}
+        initial={{ opacity: 0, x: -8 }}
+        animate={{ opacity: 0, x: -8 }}
         whileHover={{ opacity: 1, x: 0 }}
-        className={`absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
-          isGreenHover ? "text-white" : "text-primary"
-        }`}
+        className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 text-muted-foreground transition-opacity duration-300"
       >
         <svg
           className="w-5 h-5"
