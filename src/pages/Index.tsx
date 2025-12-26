@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { MapPin, Users, Building2, Send } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { StatCard } from "@/components/cards/StatCard";
+import { StatCardCarousel } from "@/components/cards/StatCardCarousel";
 import { DistrictCard } from "@/components/cards/DistrictCard";
 import { getDistricts, getTotalStats } from "@/data/farmerGroups";
 import { staggerContainer } from "@/components/layout/PageTransition";
@@ -13,6 +14,8 @@ import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import heroBackground from "@/assets/hero-background.jpeg";
 import sendFeedbackIcon from "@/assets/send-feedback-icon.png";
+
+/* ================= CONTACT SECTION ================= */
 
 const ContactSection = () => {
   const [name, setName] = useState("");
@@ -55,10 +58,6 @@ const ContactSection = () => {
           </div>
 
           <motion.form
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
             onSubmit={handleSubmit}
             className="space-y-4 bg-background rounded-xl p-6 shadow-lg border"
           >
@@ -66,7 +65,6 @@ const ContactSection = () => {
               <Label htmlFor="name">Nama</Label>
               <Input
                 id="name"
-                placeholder="Masukkan nama Anda"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
@@ -77,7 +75,6 @@ const ContactSection = () => {
               <Input
                 id="email"
                 type="email"
-                placeholder="Masukkan email Anda"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -87,7 +84,6 @@ const ContactSection = () => {
               <Label htmlFor="message">Pesan</Label>
               <Textarea
                 id="message"
-                placeholder="Tulis pesan Anda di sini..."
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
@@ -105,6 +101,8 @@ const ContactSection = () => {
   );
 };
 
+/* ================= PAGE ================= */
+
 const Index = () => {
   const districts = getDistricts();
   const stats = getTotalStats();
@@ -119,27 +117,46 @@ const Index = () => {
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+  const statItems = [
+    {
+      icon: Users,
+      value: stats.totalGroups,
+      label: "Total Kelompok Tani",
+      href: "/all-groups",
+    },
+    {
+      icon: Building2,
+      value: stats.totalDistricts,
+      label: "Kecamatan",
+      href: "/all-districts",
+    },
+    {
+      icon: Users,
+      value: stats.totalMembers,
+      label: "Total Anggota",
+      href: "/all-members",
+    },
+  ];
+
   return (
     <Layout>
-      {/* Hero Section with Parallax */}
+      {/* ================= HERO ================= */}
       <section
         ref={heroRef}
         className="relative overflow-hidden py-20 md:py-32 min-h-[70vh] flex items-center"
       >
-        {/* Background Image with Parallax */}
+        {/* Background */}
         <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
           <img
             src={heroBackground}
             alt="Petani padi di sawah"
             className="w-full h-[120%] object-cover"
           />
-          {/* Dark overlay for text readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
-          {/* Additional gradient overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
+            transition={{ duration: 1.5 }}
             className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
           />
         </motion.div>
@@ -148,7 +165,7 @@ const Index = () => {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
+            transition={{ duration: 0.6 }}
             style={{ y: textY, opacity }}
             className="text-center max-w-3xl mx-auto"
           >
@@ -177,11 +194,12 @@ const Index = () => {
                   Peta Persebaran Kelompok Tani
                 </Button>
               </Link>
+
               <Button
                 variant="outline"
                 size="lg"
                 asChild
-                className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm transition-all duration-300"
+                className="bg-white/10 border-white/30 text-white hover:bg-white/20 backdrop-blur-sm"
                 onClick={(e) => {
                   e.preventDefault();
                   document.getElementById("districts")?.scrollIntoView({
@@ -194,7 +212,6 @@ const Index = () => {
                   href="#districts"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   Jelajahi Kecamatan
                 </motion.a>
@@ -204,46 +221,28 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* ================= STATS ================= */}
       <section className="py-12 bg-muted/30">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <StatCard
-              icon={Users}
-              value={stats.totalGroups}
-              label="Total Kelompok Tani"
-              delay={0}
-              href="/all-groups"
-            />
-            <StatCard
-              icon={Building2}
-              value={stats.totalDistricts}
-              label="Kecamatan"
-              delay={0.1}
-              href="/all-districts"
-            />
-            <StatCard
-              icon={Users}
-              value={stats.totalMembers}
-              label="Total Anggota"
-              delay={0.2}
-              href="/all-members"
-            />
+          {/* Mobile */}
+          <div className="block md:hidden">
+            <StatCardCarousel stats={statItems} />
+          </div>
+
+          {/* Desktop */}
+          <div className="hidden md:grid md:grid-cols-3 gap-6">
+            {statItems.map((item, i) => (
+              <StatCard key={i} {...item} delay={i * 0.1} />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Districts Grid */}
+      {/* ================= DISTRICTS ================= */}
       <section id="districts" className="py-16">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
+          <motion.div className="text-center mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold mb-3">
               Kecamatan di Kabupaten Pandeglang
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto">
@@ -256,7 +255,6 @@ const Index = () => {
             variants={staggerContainer}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             {districts.map((district) => (
@@ -266,7 +264,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
       <ContactSection />
     </Layout>
   );
