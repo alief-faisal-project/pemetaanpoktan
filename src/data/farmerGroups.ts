@@ -256,32 +256,6 @@ export const farmerGroups: FarmerGroup[] = [
     latitude: -6.3456,
     longitude: 106.0456,
   },
-  {
-    id: "19",
-    name: "POKTAN USAHA TANI",
-    chairperson: "Deden Komar",
-    memberCount: 15,
-    commodity: "Padi",
-    district: "Cimanuk",
-    districtSlug: "cimanuk",
-    village: "Kadubale",
-    phone: "08290123456",
-    latitude: -6.3678,
-    longitude: 106.0789,
-  },
-  {
-    id: "20",
-    name: "POKTAN SUMBER MAKMUR",
-    chairperson: "Lilis Maemunah",
-    memberCount: 12,
-    commodity: "Padi",
-    district: "Cimanuk",
-    districtSlug: "cimanuk",
-    village: "Cimanuk Timur",
-    phone: "08301234567",
-    latitude: -6.3745,
-    longitude: 106.0845,
-  },
 ];
 
 // Derive districts from farmer groups

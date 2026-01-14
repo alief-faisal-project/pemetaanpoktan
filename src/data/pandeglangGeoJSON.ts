@@ -40,7 +40,6 @@ const districtCenters: Record<string, [number, number]> = {
   saketi: [-6.4045, 106.0595],
   majasari: [-6.3234, 106.0012],
   kaduhejo: [-6.3456, 106.0456],
-  cimanuk: [-6.3712, 106.0817],
 };
 
 export const getDistrictBoundaries = (): DistrictBoundary[] => {

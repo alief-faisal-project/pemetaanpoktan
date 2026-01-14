@@ -14,7 +14,7 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background">
       <div className="container flex h-16 items-center justify-between px-4">
-        {/* Logo */}
+        {/* LOGO + JUDUL (KIRI - TETAP) */}
         <Link
           to="/"
           className="relative z-20 flex items-center gap-3 flex-shrink-0 cursor-pointer"
@@ -37,7 +37,7 @@ export const Header = () => {
           </div>
         </Link>
 
-        {/* Navigation */}
+        {/* NAVIGATION KANAN */}
         <nav className="flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.href;
@@ -48,19 +48,15 @@ export const Header = () => {
                 <Button
                   variant={isActive ? "secondary" : "ghost"}
                   size="sm"
-                  className="relative overflow-hidden"
+                  className="flex items-center gap-2"
                 >
-                  {/* Desktop */}
-                  <span className="hidden sm:inline">{link.label}</span>
+                  {/* ICON (SELALU MUNCUL) */}
+                  <Icon className="h-5 w-5" />
 
-                  {/* Mobile */}
-                  <span className="sm:hidden">
-                    <Icon className="h-5 w-5" />
+                  {/* TEXT (HANYA DESKTOP) */}
+                  <span className="hidden sm:inline text-sm font-medium">
+                    {link.label}
                   </span>
-
-                  {isActive && (
-                    <div className="absolute inset-0 bg-primary/10 rounded-md -z-10" />
-                  )}
                 </Button>
               </Link>
             );
