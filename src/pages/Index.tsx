@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
-import { useRef, useState, useMemo } from "react";
+import { useRef, useState } from "react";
 import heroBackground from "@/assets/hero-background.jpeg";
 import { FaEnvelope } from "react-icons/fa";
 
@@ -42,8 +42,10 @@ const ContactSection = () => {
           className="max-w-xl mx-auto"
         >
           <div className="text-center mb-8">
-            <FaEnvelope className="h-10 w-10 text-primary mx-auto mb-4" />
-            <h2 className="text-2xl md:text-3xl font-bold mb-3">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4">
+              <FaEnvelope className="h-10 w-10 text-primary" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               Kirim Masukan
             </h2>
             <p className="text-muted-foreground">
@@ -51,34 +53,44 @@ const ContactSection = () => {
             </p>
           </div>
 
-          <form
+          <motion.form
             onSubmit={handleSubmit}
             className="space-y-4 bg-background rounded-xl p-6 shadow-lg border"
           >
-            <div>
-              <Label>Nama</Label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div>
-              <Label>Email</Label>
+            <div className="space-y-2">
+              <Label htmlFor="name">Nama</Label>
               <Input
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
-            <div>
-              <Label>Pesan</Label>
+            <div className="space-y-2">
+              <Label htmlFor="message">Pesan</Label>
               <Textarea
+                id="message"
                 rows={4}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
+                required
               />
             </div>
-            <Button type="submit" className="w-full gap-2">
-              <Send className="h-5 w-5" /> Kirim Pesan
+            <Button type="submit" size="lg" className="w-full gap-2">
+              <Send className="h-5 w-5" />
+              Kirim Pesan
             </Button>
-          </form>
+          </motion.form>
         </motion.div>
       </div>
     </section>
@@ -88,14 +100,7 @@ const ContactSection = () => {
 /* ================= PAGE ================= */
 
 const Index = () => {
-  /**
-   * 🔒 DATA ASLI (DEEP CLONE SEKALI)
-   * DistrictCard BOLEH mutasi → data ini tetap aman
-   */
-  const originalDistricts = useMemo(() => {
-    return JSON.parse(JSON.stringify(getDistricts()));
-  }, []);
-
+  const districts = getDistricts();
   const stats = getTotalStats();
   const heroRef = useRef<HTMLElement>(null);
 
@@ -129,37 +134,6 @@ const Index = () => {
     },
   ];
 
-  /* ================= SEARCH (TAMBAHAN AMAN) ================= */
-
-  const [search, setSearch] = useState("");
-
-  const normalize = (text: string) => text.toLowerCase().trim();
-
-  /**
-   * ❗ FILTER HANYA MENENTUKAN APA YANG DITAMPILKAN
-   * ❗ TIDAK PERNAH MEMODIFIKASI DATA
-   */
-  const filteredDistricts = useMemo(() => {
-    const q = normalize(search);
-    if (!q) return originalDistricts;
-
-    return originalDistricts.filter((district) => {
-      const matchDistrict = normalize(district.name || "").includes(q);
-
-      const matchGroup = district.groups?.some((group: any) =>
-        normalize(group.name || "").includes(q)
-      );
-
-      const matchMember = district.groups?.some((group: any) =>
-        group.members?.some((member: any) =>
-          normalize(member.name || "").includes(q)
-        )
-      );
-
-      return matchDistrict || matchGroup || matchMember;
-    });
-  }, [search, originalDistricts]);
-
   return (
     <Layout>
       {/* ================= HERO ================= */}
@@ -167,6 +141,7 @@ const Index = () => {
         ref={heroRef}
         className="relative overflow-hidden py-20 md:py-32 min-h-[70vh] flex items-center"
       >
+        {/* Background */}
         <motion.div className="absolute inset-0" style={{ y: backgroundY }}>
           <img
             src={heroBackground}
@@ -174,6 +149,12 @@ const Index = () => {
             className="w-full h-[120%] object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40" />
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.5 }}
+            className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+          />
         </motion.div>
 
         <div className="container relative">
@@ -184,10 +165,48 @@ const Index = () => {
             style={{ y: textY, opacity }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white mb-4 leading-tight drop-shadow-lg">
               Pemetaan Petani{" "}
               <span className="text-primary">Kabupaten Pandeglang</span>
             </h1>
+
+            <p className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl mx-auto drop-shadow-md">
+              Website pemetaan dan pengelolaan kelompok petani padi di seluruh
+              wilayah Kabupaten Pandeglang, Banten.
+            </p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap items-center justify-center gap-4"
+            >
+              <Link to="/map">
+                <Button
+                  size="lg"
+                  className="bg-white/10 border border-white/30 text-white hover:bg-white/20 backdrop-blur-none"
+                >
+                  <MapPin className="h-5 w-5" />
+                  Peta Persebaran Kelompok Tani
+                </Button>
+              </Link>
+              {/* Button jelajahi Kecamatan */}
+              <Button
+                variant="outline"
+                size="lg"
+                asChild
+                className="bg-white/10 border-white/30 text-white backdrop-blur-none hover:bg-white/20 hover:text-white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById("districts")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+              >
+                <a href="#districts">Jelajahi Kecamatan</a>
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
       </section>
@@ -195,9 +214,12 @@ const Index = () => {
       {/* ================= STATS ================= */}
       <section className="py-12 bg-muted/30">
         <div className="container">
+          {/* Mobile */}
           <div className="block md:hidden">
             <StatCardCarousel stats={statItems} />
           </div>
+
+          {/* Desktop */}
           <div className="hidden md:grid md:grid-cols-3 gap-6">
             {statItems.map((item, i) => (
               <StatCard key={i} {...item} delay={i * 0.1} />
@@ -209,21 +231,15 @@ const Index = () => {
       {/* ================= DISTRICTS ================= */}
       <section id="districts" className="py-16">
         <div className="container">
-          <div className="text-center mb-8">
+          <motion.div className="text-center mb-12">
             <h2 className="text-2xl md:text-3xl font-bold mb-3">
               Kecamatan di Kabupaten Pandeglang
             </h2>
-
-            {/* 🔍 SEARCH BAR */}
-            <div className="max-w-md mx-auto mt-6">
-              <Input
-                placeholder="Cari kecamatan, kelompok tani, atau anggota..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="h-12"
-              />
-            </div>
-          </div>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Pilih kecamatan untuk melihat data kelompok tani yang ada di
+              wilayah tersebut.
+            </p>
+          </motion.div>
 
           <motion.div
             variants={staggerContainer}
@@ -231,7 +247,7 @@ const Index = () => {
             whileInView="show"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
-            {filteredDistricts.map((district) => (
+            {districts.map((district) => (
               <DistrictCard key={district.slug} district={district} />
             ))}
           </motion.div>
