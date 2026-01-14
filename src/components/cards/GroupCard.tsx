@@ -39,9 +39,9 @@ export const GroupCard = ({ group }: GroupCardProps) => {
             <span>Ketua: {group.chairperson}</span>
           </div>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <MapPin className="h-4 w-4 shrink-0" />
-            <span>Desa {group.village}</span>
-          </div>
+  <MapPin className="h-4 w-4 shrink-0" />
+  <span>{group.district}</span>
+</div>
         </div>
 
         <Link to={`/group/${group.id}`}>

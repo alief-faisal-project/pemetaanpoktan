@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
 import { Users, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMapLocationDot } from "@fortawesome/free-solid-svg-icons";
+
 import { Button } from "@/components/ui/button";
 import { District } from "@/data/farmerGroups";
 import { staggerItem } from "@/components/layout/PageTransition";
-import mapsIcon from "@/assets/maps-icon.png";
 
 interface DistrictCardProps {
   district: District;
@@ -29,20 +31,21 @@ export const DistrictCard = ({ district }: DistrictCardProps) => {
 
       <div className="p-6">
         <div className="flex items-center gap-4 mb-4">
+          {/* Map Icon */}
           <motion.div
-            className="flex h-12 w-12 items-center justify-center rounded-full overflow-hidden flex-shrink-0"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-primary flex-shrink-0"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}
           >
-            <img
-              src={mapsIcon}
-              alt="Maps"
-              className="h-12 w-12 object-contain"
+            <FontAwesomeIcon
+              icon={faMapLocationDot}
+              className="h-6 w-6 text-white"
             />
           </motion.div>
+
           <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary text-primary-foreground">
             <Users className="h-4 w-4" />
-            <span className="font-semibold text-sm">
+            <span className="font-semibold text-sm text-white">
               {district.totalMembers} Anggota
             </span>
           </div>

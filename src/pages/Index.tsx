@@ -13,7 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 import { useRef, useState } from "react";
 import heroBackground from "@/assets/hero-background.jpeg";
-import sendFeedbackIcon from "@/assets/send-feedback-icon.png";
+import { FaEnvelope } from "react-icons/fa";
+
 
 /* ================= CONTACT SECTION ================= */
 
@@ -32,7 +33,7 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact-section" className="py-16 bg-primary/5">
+    <section id="contact-section" className="py-16 bg-secondary">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -43,11 +44,7 @@ const ContactSection = () => {
         >
           <div className="text-center mb-8">
             <div className="inline-flex items-center justify-center w-14 h-14 rounded-full mb-4">
-              <img
-                src={sendFeedbackIcon}
-                alt="Kirim Masukan"
-                className="h-14 w-14 object-contain"
-              />
+              <FaEnvelope className="h-10 w-10 text-primary" />
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               Kirim Masukan
