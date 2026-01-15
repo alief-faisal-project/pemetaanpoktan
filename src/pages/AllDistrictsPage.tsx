@@ -28,7 +28,7 @@ const AllDistrictsPage = () => {
               Kembali
             </Button>
           </Link>
-
+          {/* semua kecamatan dari 3 district stat */}
           <div className="flex items-center gap-4 mb-2">
             <motion.div
               initial={{ scale: 0 }}
@@ -39,9 +39,9 @@ const AllDistrictsPage = () => {
                 damping: 20,
                 delay: 0.2,
               }}
-              className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/10"
+              className="flex h-14 w-14 items-center justify-center rounded-full bg-primary"
             >
-              <Building2 className="h-7 w-7 text-primary" />
+              <Building2 className="h-7 w-7 text-white" />
             </motion.div>
             <div>
               <motion.h1

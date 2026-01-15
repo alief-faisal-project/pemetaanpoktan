@@ -36,11 +36,11 @@ export const StatCard = ({
       {/* Soft hover overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-      {/* Icon */}
+      {/* 3 Icon stat card */}
       <motion.div
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-primary transition-colors duration-300"
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-secondary transition-colors duration-300"
       >
-        <Icon className="h-7 w-7 text-white" />
+        <Icon className="h-7 w-7 text-primary" />
       </motion.div>
 
       {/* Value */}
