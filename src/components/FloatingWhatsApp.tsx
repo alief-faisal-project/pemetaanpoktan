@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import whatsappIcon from "@/assets/whatsapp-floating.png";
+import { FaWhatsapp } from "react-icons/fa";
 import {
   Tooltip,
   TooltipContent,
@@ -54,33 +54,51 @@ export const FloatingWhatsApp = ({
           <Tooltip>
             <TooltipTrigger asChild>
               <motion.button
-                initial={{ opacity: 0, y: 24, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 24, scale: 0.9 }}
-                whileHover={{
-                  y: -4,
-                  scale: 1.05,
-                  boxShadow: "0 12px 24px rgba(0,0,0,0.15)",
-                }}
-                whileTap={{ scale: 0.95 }}
-                transition={{
-                  duration: 0.35,
-                  ease: "easeOut",
-                }}
                 onClick={handleClick}
-                className="fixed bottom-6 right-6 z-50 w-14 h-14 md:w-16 md:h-16 rounded-full bg-white shadow-md"
                 aria-label="Chat via WhatsApp"
+                className="fixed bottom-6 right-6 z-50
+                   w-14 h-14 md:w-16 md:h-16
+                   rounded-full
+                   bg-primary
+                   flex items-center justify-center
+                   shadow-xl
+                   overflow-visible"
               >
-                <img
-                  src={whatsappIcon}
-                  alt="WhatsApp"
-                  className="w-full h-full object-contain"
+                {/* WAVE 1 */}
+                <motion.span
+                  className="absolute inset-0 rounded-full border-2 border-primary"
+                  initial={{ scale: 1, opacity: 0.9 }}
+                  animate={{ scale: 1.3, opacity: 0 }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                  }}
                 />
+
+                {/* WAVE 2 (delay) */}
+                <motion.span
+                  className="absolute inset-0 rounded-full border-2 border-primary"
+                  initial={{ scale: 1, opacity: 0.9 }}
+                  animate={{ scale: 1.3, opacity: 0 }}
+                  transition={{
+                    duration: 1.8,
+                    repeat: Infinity,
+                    ease: "easeOut",
+                    delay: 0.9,
+                  }}
+                />
+
+                {/* ICON */}
+                <FaWhatsapp className="relative w-7 h-7 md:w-11 md:h-11 text-white" />
               </motion.button>
             </TooltipTrigger>
 
-            <TooltipContent side="left">
-              <p>Kirim Masukan</p>
+            <TooltipContent
+              side="left"
+              className="bg-card/90 backdrop-blur-md border-border/50 text-foreground px-3 py-2 rounded-lg shadow-xl"
+            >
+              <p className="font-medium">Chat WhatsApp</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>

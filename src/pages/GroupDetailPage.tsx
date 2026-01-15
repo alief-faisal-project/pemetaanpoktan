@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapContainer } from "@/components/map/MapContainer";
 import { getGroupById } from "@/data/farmerGroups";
-import logoWhatsapp from "@/assets/logo-whatsapp.png";
+
 
 const GroupDetailPage = () => {
   const { id } = useParams<{ id: string }>();
